@@ -13,7 +13,11 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
+    @Autowired
+    EventServiceImpl eventService;
+
     public Employee createEmployee(Employee employee){
+        eventService.raiseEvents(employee);
         return employeeRepository.save(employee);
     }
 
@@ -21,6 +25,7 @@ public class EmployeeService {
         return employeeRepository.findById(id).get();
     }
     public List<Employee> findAllEmployee(){
+
         return employeeRepository.findAll();
     }
 
